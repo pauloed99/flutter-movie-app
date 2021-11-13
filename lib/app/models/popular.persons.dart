@@ -1,17 +1,15 @@
 class PopularPersons {
-  int? page;
-  List<Results>? results;
-  int? totalResults;
-  int? totalPages;
-
-  PopularPersons({this.page, this.results, this.totalResults, this.totalPages});
+  late int page;
+  late List<Results> results;
+  late int totalResults;
+  late int totalPages;
 
   PopularPersons.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results.add(Results.fromJson(v));
       });
     }
     totalResults = json['total_results'];
@@ -21,9 +19,7 @@ class PopularPersons {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['page'] = page;
-    if (results != null) {
-      data['results'] = results?.map((v) => v.toJson()).toList();
-    }
+    data['results'] = results.map((v) => v.toJson()).toList();
     data['total_results'] = totalResults;
     data['total_pages'] = totalPages;
     return data;
@@ -31,20 +27,12 @@ class PopularPersons {
 }
 
 class Results {
-  String? profilePath;
-  bool? adult;
-  int? id;
-  List<KnownFor>? knownFor;
-  String? name;
-  double? popularity;
-
-  Results(
-      {this.profilePath,
-      this.adult,
-      this.id,
-      this.knownFor,
-      this.name,
-      this.popularity});
+  late String profilePath;
+  late bool adult;
+  late int id;
+  late List<KnownFor> knownFor;
+  late String name;
+  late double popularity;
 
   Results.fromJson(Map<String, dynamic> json) {
     profilePath = json['profile_path'];
@@ -53,7 +41,7 @@ class Results {
     if (json['known_for'] != null) {
       knownFor = <KnownFor>[];
       json['known_for'].forEach((v) {
-        knownFor?.add(KnownFor.fromJson(v));
+        knownFor.add(KnownFor.fromJson(v));
       });
     }
     name = json['name'];
@@ -65,9 +53,7 @@ class Results {
     data['profile_path'] = profilePath;
     data['adult'] = adult;
     data['id'] = id;
-    if (knownFor != null) {
-      data['known_for'] = knownFor?.map((v) => v.toJson()).toList();
-    }
+    data['known_for'] = knownFor.map((v) => v.toJson()).toList();
     data['name'] = name;
     data['popularity'] = popularity;
     return data;
@@ -76,45 +62,24 @@ class Results {
 
 class KnownFor {
   String? posterPath;
-  bool? adult;
-  String? overview;
-  String? releaseDate;
-  String? originalTitle;
-  List<int>? genreIds;
-  int? id;
-  String? mediaType;
-  String? originalLanguage;
-  String? title;
+  late bool adult;
+  late String overview;
+  late String releaseDate;
+  late String originalTitle;
+  late List<int> genreIds;
+  late int id;
+  late String mediaType;
+  late String originalLanguage;
+  late String title;
   String? backdropPath;
-  double? popularity;
-  int? voteCount;
-  bool? video;
-  double? voteAverage;
-  String? firstAirDate;
-  List<String>? originCountry;
-  String? name;
-  String? originalName;
-
-  KnownFor(
-      {this.posterPath,
-      this.adult,
-      this.overview,
-      this.releaseDate,
-      this.originalTitle,
-      this.genreIds,
-      this.id,
-      this.mediaType,
-      this.originalLanguage,
-      this.title,
-      this.backdropPath,
-      this.popularity,
-      this.voteCount,
-      this.video,
-      this.voteAverage,
-      this.firstAirDate,
-      this.originCountry,
-      this.name,
-      this.originalName});
+  late double popularity;
+  late int voteCount;
+  late bool video;
+  late double voteAverage;
+  late String firstAirDate;
+  late List<String> originCountry;
+  late String name;
+  late String originalName;
 
   KnownFor.fromJson(Map<String, dynamic> json) {
     posterPath = json['poster_path'];

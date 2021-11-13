@@ -1,15 +1,13 @@
 class MovieVideos {
-  int? id;
-  List<Results>? results;
-
-  MovieVideos({this.id, this.results});
+  late int id;
+  late List<Results> results;
 
   MovieVideos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results.add(Results.fromJson(v));
       });
     }
   }
@@ -17,36 +15,22 @@ class MovieVideos {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    if (results != null) {
-      data['results'] = results?.map((v) => v.toJson()).toList();
-    }
+    data['results'] = results.map((v) => v.toJson()).toList();
     return data;
   }
 }
 
 class Results {
-  String? iso6391;
-  String? iso31661;
-  String? name;
-  String? key;
-  String? site;
-  int? size;
-  String? type;
-  bool? official;
-  String? publishedAt;
-  String? id;
-
-  Results(
-      {this.iso6391,
-      this.iso31661,
-      this.name,
-      this.key,
-      this.site,
-      this.size,
-      this.type,
-      this.official,
-      this.publishedAt,
-      this.id});
+  late String iso6391;
+  late String iso31661;
+  late String name;
+  late String key;
+  late String site;
+  late int size;
+  late String type;
+  late bool official;
+  late String publishedAt;
+  late String id;
 
   Results.fromJson(Map<String, dynamic> json) {
     iso6391 = json['iso_639_1'];

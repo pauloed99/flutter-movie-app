@@ -4,12 +4,14 @@ class CustomTextWidget extends StatelessWidget {
   final String text;
   final double? fontSize;
   final Color? color;
+  final FontWeight? fontWeight;
 
   const CustomTextWidget({
     Key? key,
     required this.text,
     this.fontSize,
     this.color,
+    this.fontWeight,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class CustomTextWidget extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: fontSize,
+        fontWeight: fontWeight,
       ),
     );
   }

@@ -1,17 +1,15 @@
 class MoviePopulars {
-  int? page;
-  List<Results>? results;
-  int? totalResults;
-  int? totalPages;
-
-  MoviePopulars({this.page, this.results, this.totalResults, this.totalPages});
+  late int page;
+  late List<Results> results;
+  late int totalResults;
+  late int totalPages;
 
   MoviePopulars.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results.add(Results.fromJson(v));
       });
     }
     totalResults = json['total_results'];
@@ -19,11 +17,9 @@ class MoviePopulars {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['page'] = page;
-    if (results != null) {
-      data['results'] = results?.map((v) => v.toJson()).toList();
-    }
+    data['results'] = results.map((v) => v.toJson()).toList();
     data['total_results'] = totalResults;
     data['total_pages'] = totalPages;
     return data;
@@ -32,35 +28,18 @@ class MoviePopulars {
 
 class Results {
   String? posterPath;
-  bool? adult;
-  String? overview;
-  String? releaseDate;
-  List<int>? genreIds;
-  int? id;
-  String? originalTitle;
-  String? originalLanguage;
-  String? title;
+  late bool adult;
+  late String overview;
+  late String releaseDate;
+  late List<int> genreIds;
+  late int id;
+  late String originalTitle;
+  late String originalLanguage;
+  late String title;
   String? backdropPath;
-  double? popularity;
-  int? voteCount;
-  bool? video;
-  double? voteAverage;
-
-  Results(
-      {this.posterPath,
-      this.adult,
-      this.overview,
-      this.releaseDate,
-      this.genreIds,
-      this.id,
-      this.originalTitle,
-      this.originalLanguage,
-      this.title,
-      this.backdropPath,
-      this.popularity,
-      this.voteCount,
-      this.video,
-      this.voteAverage});
+  late double popularity;
+  late int voteCount;
+  late bool video;
 
   Results.fromJson(Map<String, dynamic> json) {
     posterPath = json['poster_path'];
@@ -76,11 +55,10 @@ class Results {
     popularity = json['popularity'];
     voteCount = json['vote_count'];
     video = json['video'];
-    voteAverage = json['vote_average'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['poster_path'] = posterPath;
     data['adult'] = adult;
     data['overview'] = overview;
@@ -94,7 +72,7 @@ class Results {
     data['popularity'] = popularity;
     data['vote_count'] = voteCount;
     data['video'] = video;
-    data['vote_average'] = voteAverage;
+
     return data;
   }
 }

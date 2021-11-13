@@ -1,44 +1,23 @@
 class Movie {
-  bool? adult;
+  late bool adult;
   String? backdropPath;
-  List<Genres>? genres;
-  int? id;
+  late List<Genres> genres;
+  late int id;
   String? imdbId;
-  String? originalLanguage;
-  String? originalTitle;
+  late String originalLanguage;
+  late String originalTitle;
   String? overview;
-  double? popularity;
-  String? releaseDate;
-  int? revenue;
+  late double popularity;
+  late String releaseDate;
+  late int revenue;
   int? runtime;
-  List<SpokenLanguages>? spokenLanguages;
-  String? status;
+  late List<SpokenLanguages> spokenLanguages;
+  late String status;
   String? tagline;
-  String? title;
-  bool? video;
-  double? voteAverage;
-  int? voteCount;
-
-  Movie(
-      {this.adult,
-      this.backdropPath,
-      this.genres,
-      this.id,
-      this.imdbId,
-      this.originalLanguage,
-      this.originalTitle,
-      this.overview,
-      this.popularity,
-      this.releaseDate,
-      this.revenue,
-      this.runtime,
-      this.spokenLanguages,
-      this.status,
-      this.tagline,
-      this.title,
-      this.video,
-      this.voteAverage,
-      this.voteCount});
+  late String title;
+  late bool video;
+  late double voteAverage;
+  late int voteCount;
 
   Movie.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -46,7 +25,7 @@ class Movie {
     if (json['genres'] != null) {
       genres = <Genres>[];
       json['genres'].forEach((v) {
-        genres?.add(Genres.fromJson(v));
+        genres.add(Genres.fromJson(v));
       });
     }
     id = json['id'];
@@ -61,7 +40,7 @@ class Movie {
     if (json['spoken_languages'] != null) {
       spokenLanguages = <SpokenLanguages>[];
       json['spoken_languages'].forEach((v) {
-        spokenLanguages?.add(SpokenLanguages.fromJson(v));
+        spokenLanguages.add(SpokenLanguages.fromJson(v));
       });
     }
     status = json['status'];
@@ -76,9 +55,7 @@ class Movie {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['adult'] = adult;
     data['backdrop_path'] = backdropPath;
-    if (genres != null) {
-      data['genres'] = genres?.map((v) => v.toJson()).toList();
-    }
+    data['genres'] = genres.map((v) => v.toJson()).toList();
     data['id'] = id;
     data['imdb_id'] = imdbId;
     data['original_language'] = originalLanguage;
@@ -88,10 +65,8 @@ class Movie {
     data['release_date'] = releaseDate;
     data['revenue'] = revenue;
     data['runtime'] = runtime;
-    if (spokenLanguages != null) {
-      data['spoken_languages'] =
-          spokenLanguages?.map((v) => v.toJson()).toList();
-    }
+    data['spoken_languages'] =
+        spokenLanguages.map((v) => v.toJson()).toList();
     data['status'] = status;
     data['tagline'] = tagline;
     data['title'] = title;
@@ -103,10 +78,8 @@ class Movie {
 }
 
 class Genres {
-  int? id;
-  String? name;
-
-  Genres({this.id, this.name});
+  late int id;
+  late String name;
 
   Genres.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -122,10 +95,8 @@ class Genres {
 }
 
 class SpokenLanguages {
-  String? iso6391;
-  String? name;
-
-  SpokenLanguages({this.iso6391, this.name});
+  late String iso6391;
+  late String name;
 
   SpokenLanguages.fromJson(Map<String, dynamic> json) {
     iso6391 = json['iso_639_1'];

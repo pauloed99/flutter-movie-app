@@ -1,17 +1,15 @@
 class MovieTopRated {
-  int? page;
-  List<Results>? results;
-  int? totalResults;
-  int? totalPages;
-
-  MovieTopRated({this.page, this.results, this.totalResults, this.totalPages});
+  late int page;
+  late List<Results> results;
+  late int totalResults;
+  late int totalPages;
 
   MovieTopRated.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results.add(Results.fromJson(v));
       });
     }
     totalResults = json['total_results'];
@@ -21,9 +19,7 @@ class MovieTopRated {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['page'] = page;
-    if (results != null) {
-      data['results'] = results?.map((v) => v.toJson()).toList();
-    }
+    data['results'] = results.map((v) => v.toJson()).toList();
     data['total_results'] = totalResults;
     data['total_pages'] = totalPages;
     return data;
@@ -32,35 +28,19 @@ class MovieTopRated {
 
 class Results {
   String? posterPath;
-  bool? adult;
-  String? overview;
-  String? releaseDate;
-  List<int>? genreIds;
-  int? id;
-  String? originalTitle;
-  String? originalLanguage;
-  String? title;
+  late bool adult;
+  late String overview;
+  late String releaseDate;
+  late List<int> genreIds;
+  late int id;
+  late String originalTitle;
+  late String originalLanguage;
+  late String title;
   String? backdropPath;
-  double? popularity;
-  int? voteCount;
-  bool? video;
-  double? voteAverage;
-
-  Results(
-      {this.posterPath,
-      this.adult,
-      this.overview,
-      this.releaseDate,
-      this.genreIds,
-      this.id,
-      this.originalTitle,
-      this.originalLanguage,
-      this.title,
-      this.backdropPath,
-      this.popularity,
-      this.voteCount,
-      this.video,
-      this.voteAverage});
+  late double popularity;
+  late int voteCount;
+  late bool video;
+  late double voteAverage;
 
   Results.fromJson(Map<String, dynamic> json) {
     posterPath = json['poster_path'];
