@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:movies_app/app/controllers/movie.controller.dart';
-import 'package:movies_app/app/models/movie.populars.dart';
-import 'package:movies_app/app/utils/constants.dart';
 import 'package:movies_app/app/views/widgets/custom.text.widget.dart';
+import 'package:movies_app/app/views/widgets/movies.popular.widget.dart';
+import 'package:movies_app/app/views/widgets/movies.top.rated.widget.dart';
+import 'package:movies_app/app/views/widgets/popular.persons.widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -27,50 +28,54 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(left: 10, top: 20),
-            child: CustomTextWidget(
-              text: 'Filmes mais populares',
-              fontSize: width * .06,
-              fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(left: 10, top: 20),
+              child: CustomTextWidget(
+                text: 'Filmes mais populares',
+                fontSize: width * .06,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          Container(
-            width: width,
-            height: height * .4,
-            child: FutureBuilder<MoviePopulars>(
-              future: controller.getMoviePopulars(),
-              builder: (_, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) => Image.network(
-                      Constants.imageRelativePath +
-                          (snapshot.data!.results![index].posterPath ?? ''),
-                      height: height * .2,
-                      width: width * .4,
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                }
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: CustomTextWidget(
-                      text: 'erro interno no servidor',
-                    ),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
+            Container(
+              margin: const EdgeInsets.only(top: 15),
+              width: width,
+              height: height * .3,
+              child: MoviesPopularWidget(),
             ),
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.only(left: 10, top: 30),
+              child: CustomTextWidget(
+                text: 'Filmes mais bem avaliados',
+                fontSize: width * .06,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              width: width,
+              height: height * .3,
+              margin: const EdgeInsets.only(top: 15),
+              child: MoviesTopRatedWidget(),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 10, top: 30),
+              child: CustomTextWidget(
+                text: 'Pessoas mais populares',
+                fontSize: width * .06,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              width: width,
+              height: height * .3,
+              margin: const EdgeInsets.only(top: 15),
+              child: PopularPersonsWidget(),
+            ),
+          ],
+        ),
       ),
     );
   }
