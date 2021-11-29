@@ -8,14 +8,22 @@ class MovieRepository {
   MovieRepository({required this.dio});
 
   Future<MoviePopulars> getMoviesPopular() async {
-    final response = await dio.get('movie/popular');
-    final moviesPopulars = MoviePopulars.fromJson(response.data);
-    return moviesPopulars;
+    try {
+      final response = await dio.get('movie/popular');
+      final moviesPopulars = MoviePopulars.fromJson(response.data);
+      return moviesPopulars;
+    } catch (e) {
+      throw Exception('Erro no servidor!');
+    }
   }
 
   Future<MovieTopRated> getMoviesTopRated() async {
-    final response = await dio.get('movie/top_rated');
-    final moviesTopRated = MovieTopRated.fromJson(response.data);
-    return moviesTopRated;
+    try {
+      final response = await dio.get('movie/top_rated');
+      final moviesTopRated = MovieTopRated.fromJson(response.data);
+      return moviesTopRated;
+    } catch (e) {
+      throw Exception('Erro no servidor!');
+    }
   }
 }

@@ -15,21 +15,42 @@ class MoviesTopRatedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
     return FutureBuilder<MovieTopRated>(
       future: controller.getMoviesTopRated(),
       builder: (_, snapshot) {
         if (snapshot.hasData) {
+          final data = snapshot.data;
           return CarouselSlider(
             items: <Widget>[
-              for (var i = 0; i < snapshot.data!.results.length; i++)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(width * .05),
-                  child: Image.network(
-                    Constants.imageRelativePath +
-                        (snapshot.data?.results[i].posterPath ?? ''),
-                    width: width * .6,
-                    fit: BoxFit.fill,
-                  ),
+              for (var i = 0; i < data!.results.length; i++)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(width * .05),
+                        child: Image.network(
+                          Constants.imageRelativePath +
+                              (data.results[i].posterPath ?? ''),
+                          width: width * .6,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height * .01),
+                    CustomTextWidget(
+                      text: data.results[i].title,
+                      fontSize: width * .05,
+                      textOverflow: TextOverflow.ellipsis,
+                    ),
+                    CustomTextWidget(
+                      text:
+                          "Pontuação de popularidade: ${data.results[i].popularity}",
+                      fontSize: width * .035,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ],
                 ),
             ],
             options: CarouselOptions(
@@ -42,9 +63,9 @@ class MoviesTopRatedWidget extends StatelessWidget {
           );
         }
         if (snapshot.hasError) {
-          return const Center(
+          return Center(
             child: CustomTextWidget(
-              text: 'Erro interno no servidor',
+              text: snapshot.error.toString(),
             ),
           );
         } else {
