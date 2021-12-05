@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(
       const Duration(seconds: 3),
-      () => Modular.to.pushReplacementNamed('/home'),
+      () => Modular.to.navigate('/start/home'),
     );
   }
 
