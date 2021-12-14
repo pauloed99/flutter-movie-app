@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:movies_app/app/models/movie.dart';
+import 'package:movies_app/app/models/movie.images.dart';
 import 'package:movies_app/app/models/movie.populars.dart';
 import 'package:movies_app/app/models/movie.top.rated.dart';
+import 'package:movies_app/app/models/movie.videos.dart';
 
 class MovieRepository {
   final Dio dio;
@@ -22,6 +25,36 @@ class MovieRepository {
       final response = await dio.get('movie/top_rated');
       final moviesTopRated = MovieTopRated.fromJson(response.data);
       return moviesTopRated;
+    } catch (e) {
+      throw Exception('Erro no servidor!');
+    }
+  }
+
+  Future<Movie> getSpecificMovie(String id) async {
+    try {
+      final response = await dio.get('movie/$id');
+      final movie = Movie.fromJson(response.data);
+      return movie;
+    } catch (e) {
+      throw Exception('Erro no servidor!');
+    }
+  }
+
+  Future<MovieVideos> getMovieVideos(String id) async {
+    try {
+      final response = await dio.get('movie/$id/videos');
+      final movieVideos = MovieVideos.fromJson(response.data);
+      return movieVideos;
+    } catch (e) {
+      throw Exception('Erro no servidor!');
+    }
+  }
+
+  Future<MovieImages> getMovieImages(String id) async {
+    try {
+      final response = await dio.get('movie/$id/images');
+      final movieImages = MovieImages.fromJson(response.data);
+      return movieImages;
     } catch (e) {
       throw Exception('Erro no servidor!');
     }

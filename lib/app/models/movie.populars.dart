@@ -37,7 +37,7 @@ class Results {
   late String originalLanguage;
   late String title;
   String? backdropPath;
-  late double popularity;
+  late num popularity;
   late int voteCount;
   late bool video;
 

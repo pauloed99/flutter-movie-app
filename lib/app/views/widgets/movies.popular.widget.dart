@@ -24,33 +24,44 @@ class MoviesPopularWidget extends StatelessWidget {
           return CarouselSlider(
             items: <Widget>[
               for (var i = 0; i < data!.results.length; i++)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(width * .05),
-                        child: Image.network(
-                          Constants.imageRelativePath +
-                              (data.results[i].posterPath ?? ''),
-                          width: width * .6,
-                          fit: BoxFit.fill,
+                GestureDetector(
+                  onTap: () {
+                    Modular.to.pushNamed('movie/${data.results[i].id}');
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(width * .05),
+                          child: data.results[i].posterPath != null
+                              ? Image.network(
+                                  Constants.imageRelativePath +
+                                      data.results[i].posterPath!,
+                                  width: width * .6,
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.asset(
+                                  'assets/images/default_image_movie.jpeg',
+                                  width: width * .6,
+                                  fit: BoxFit.fill,
+                                ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: height * .01),
-                    CustomTextWidget(
-                      text: data.results[i].title,
-                      fontSize: width * .05,
-                      textOverflow: TextOverflow.ellipsis,
-                    ),
-                    CustomTextWidget(
-                      text:
-                          "Pontuação de popularidade: ${data.results[i].popularity}",
-                      fontSize: width * .035,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ],
+                      SizedBox(height: height * .01),
+                      CustomTextWidget(
+                        text: data.results[i].title,
+                        fontSize: width * .05,
+                        textOverflow: TextOverflow.ellipsis,
+                      ),
+                      CustomTextWidget(
+                        text:
+                            "Pontuação de popularidade: ${data.results[i].popularity}",
+                        fontSize: width * .035,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ],
+                  ),
                 ),
             ],
             options: CarouselOptions(

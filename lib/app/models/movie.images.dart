@@ -29,10 +29,10 @@ class MovieImages {
 }
 
 class Backdrops {
-  late double aspectRatio;
+  late num aspectRatio;
   late String filePath;
   late int height;
-  late int voteAverage;
+  late num voteAverage;
   late int voteCount;
   late int width;
 
