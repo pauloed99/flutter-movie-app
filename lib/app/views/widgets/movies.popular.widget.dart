@@ -25,7 +25,8 @@ class MoviesPopularWidget extends StatelessWidget {
             items: <Widget>[
               for (var i = 0; i < data!.results.length; i++)
                 GestureDetector(
-                  onTap: () => Modular.to.pushNamed('movie/${data.results[i].id}'),
+                  onTap: () => Modular.to
+                      .pushNamed('/start/home/movie/${data.results[i].id}'),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

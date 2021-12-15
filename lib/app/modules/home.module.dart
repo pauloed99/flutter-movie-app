@@ -16,6 +16,6 @@ class HomeModule extends Module {
         ChildRoute(
           '/movie/:id',
           child: (_, args) => SpecificMoviePage(),
-        )
+        ),
       ];
 }
