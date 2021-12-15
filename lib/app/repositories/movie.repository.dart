@@ -4,6 +4,7 @@ import 'package:movies_app/app/models/movie.images.dart';
 import 'package:movies_app/app/models/movie.populars.dart';
 import 'package:movies_app/app/models/movie.top.rated.dart';
 import 'package:movies_app/app/models/movie.videos.dart';
+import 'package:movies_app/app/models/movies.search.dart';
 
 class MovieRepository {
   final Dio dio;
@@ -57,6 +58,17 @@ class MovieRepository {
       return movieImages;
     } catch (e) {
       throw Exception('Erro no servidor!');
+    }
+  }
+
+  Future<MoviesSearch> searchSpecificMovies(String movie) async {
+    try {
+      final response =
+          await dio.get('search/movie', queryParameters: {'query': movie});
+      final specificMovies = MoviesSearch.fromJson(response.data);
+      return specificMovies;
+    } on DioError catch (e) {
+      throw Exception('Erro no servidor');
     }
   }
 }
